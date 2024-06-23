@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,7 +12,7 @@ class UserController extends Controller
     public function index()
     {
         $data = [
-            "users" => user::all(),
+            "users" => User::with('role')->get(),
         ];
 
         return view('user.index', $data);
@@ -71,24 +70,35 @@ class UserController extends Controller
         $request->validate([
             'name' => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users,email,'. $id],
-            'old_password' => ['required'],
+            // 'old_password' => ['required'],
             'password' => ['nullable', 'confirmed'],
             'password_confirmation' => ['nullable'],
             'role_id' => ['required', 'numeric'],
         ]);
 
-        $user = User::find($id);
-        $match = Hash::check($request->old_password,$user->password);
+        // $user = User::find($id);
+        // $match = Hash::check($request->old_password,$user->password);
 
-        if($match) {
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
-            if ($request->input('password')) {
-                $user->password = Hash::make($request->input('password'));
-            }
-            $user->role_id = $request->input('role_id');
-            $user->save();
-        }
+        // if($match) {
+        //     $user->name = $request->input('name');
+        //     $user->email = $request->input('email');
+        //     if ($request->input('password')) {
+        //         $user->password = Hash::make($request->input('password'));
+        //     }
+        //     $user->role_id = $request->input('role_id');
+        //     $user->save();
+        // }
+        $user = User::find($id);
+
+    // Update data pengguna
+    $user->name = $request->input('name');
+    $user->email = $request->input('email');
+    if ($request->input('password')) {
+        $user->password = Hash::make($request->input('password'));
+    }
+    $user->role_id = $request->input('role_id');
+    $user->save();
+    
         return redirect()->route('user.index')->with('success', 'User berhasil diupdate');
     }
 }
