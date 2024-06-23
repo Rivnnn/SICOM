@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    
     public function index()
     {
         $data = [
@@ -98,7 +104,7 @@ class UserController extends Controller
     }
     $user->role_id = $request->input('role_id');
     $user->save();
-    
+
         return redirect()->route('user.index')->with('success', 'User berhasil diupdate');
     }
 }
