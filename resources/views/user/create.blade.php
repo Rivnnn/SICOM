@@ -15,8 +15,8 @@
                     <div class="input-container">
                         <input type="text" name="name" id="name" placeholder="Masukan Nama"
                             value="{{ old('name') }}">
-                        @error('name')
-                            <x-invalid :message="$message" />
+                        @error('role_id')
+                            <span class="invalid">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -28,8 +28,8 @@
                     <div class="input-container">
                         <input type="text" name="email" id="email" placeholder="Masukan Email"
                             value="{{ old('email') }}">
-                        @error('email')
-                            <x-invalid :message="$message" />
+                        @error('role_id')
+                            <span class="invalid">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -41,8 +41,8 @@
                     <div class="input-container">
                         <input type="password" name="password" id="password" placeholder="Masukan Password"
                             value="{{ old('password') }}">
-                        @error('password')
-                            <x-invalid :message="$message" />
+                        @error('role_id')
+                            <span class="invalid">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -54,8 +54,8 @@
                     <div class="input-container">
                         <input type="password" name="password_confirmation" id="password_confirmation"
                             placeholder="Masukan Password" value="{{ old('password_confirmation') }}">
-                        @error('password_confirmation')
-                            <x-invalid :message="$message" />
+                        @error('role_id')
+                            <span class="invalid">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                         <input type="number" name="role_id" id="role_id" placeholder="Tentukan Role"
                             value="{{ old('role_id') }}">
                         @error('role_id')
-                            <x-invalid :message="$message" />
+                            <span class="invalid">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>

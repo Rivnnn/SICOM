@@ -32,9 +32,6 @@
                             </li>
                         @endif
                     @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.index') }}">{{ __('User') }}</a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -53,6 +50,9 @@
                                 </form>
                             </div>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.index') }}">{{ __('Data User') }}</a>
+                        </li>
 
                     @endguest
                 </ul>
@@ -62,6 +62,7 @@
 
     <main class="py-4">
         @yield('content')
+        
     </main>
     </div>
     @vite('resources/js/app.js')

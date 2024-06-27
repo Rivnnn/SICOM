@@ -27,7 +27,6 @@
                                     <td class="border text-center">{{ $user->name }}</td>
                                     <td class="border text-center">{{ $user->email }}</td>
                                     <td class="border text-center">{{ $user->role->role }}</td>
-
                                     <td class="border text-center">
                                         <div class="flex gap-x-5 items-center justify-center">
                                             <button class="btn btn-primary"
@@ -46,7 +45,6 @@
                             @endforeach
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
