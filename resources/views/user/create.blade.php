@@ -65,8 +65,12 @@
                         <span><sup>*</sup></span> Role
                     </label>
                     <div class="input-container">
-                        <input type="number" name="role_id" id="role_id" placeholder="Tentukan Role"
-                            value="{{ old('role_id') }}">
+                        <select name="role_id" id="role_id">
+                            <option value="">Tentukan Role</option>
+                            <option value="1">Admin</option>
+                            <option value="2">Seller</option>
+                            <option value="3">User</option>
+                        </select>
                         @error('role_id')
                             <span class="invalid">{{ $message }}</span>
                         @enderror
