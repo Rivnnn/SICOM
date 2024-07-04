@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Review;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
-class ReviewController extends Controller
+class ServiceController extends Controller
 {
     public function __construct()
     {
@@ -15,10 +15,6 @@ class ReviewController extends Controller
     
     public function index()
     {
-        $data = [
-            "review" => Review::all(),
-        ];
-
-        return view('review.index', $data);
+        return view('service.index');
     }
 }

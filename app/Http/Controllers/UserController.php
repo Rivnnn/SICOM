@@ -31,14 +31,6 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', $users -> name . " berhasil dihapus");
     }
 
-    public function create()
-    {
-        $roles = Role::all();
-        $data = [
-            "roles"  => $roles
-        ];
-        return view('user.create');
-    }
 
     public function edit($id)
     {
@@ -50,27 +42,7 @@ class UserController extends Controller
         ];
         return view('user.edit', $data);
     }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => ['required', 'string'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'confirmed'],
-            'password_confirmation' => ['required'],
-            'role_id' => ['required', 'numeric'],
-        ]);
-
-        $users = User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-            'role_id' => $request->input('role_id'),
-        ]);
-
-        return redirect()->route('user.index')->with('success', 'User baru berhasil ditambahkan');
-    }
-
+    
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -107,5 +79,36 @@ class UserController extends Controller
 
         return redirect()->route('user.index')->with('success', 'User berhasil diupdate');
     }
+
+    public function create()
+    {
+        $roles = Role::all();
+        $data = [
+            "roles"  => $roles
+        ];
+        return view('user.create');
+    }
+
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'confirmed'],
+            'password_confirmation' => ['required'],
+            'role_id' => ['required', 'numeric'],
+        ]);
+
+        $users = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'role_id' => $request->input('role_id'),
+        ]);
+
+        return redirect()->route('user.index')->with('success', 'User baru berhasil ditambahkan');
+    }
+
 }
 

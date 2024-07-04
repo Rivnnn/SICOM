@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('commissions', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->string('deskrpsi');
-            $table->string('harga');
-            $table->string('commission_id');
+            $table->foreignId('user_id');
+            $table->string('title');
+            $table->text('description');
+            $table->decimal('price', 8, 2);
+            $table->foreignId('category_id');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('commissions');
+        Schema::dropIfExists('services');
     }
 };

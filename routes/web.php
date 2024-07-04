@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserController;
 use App\Models\Commission;
 use App\Models\Review;
@@ -21,4 +22,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('user', UserController::class);
 Route::resource('order', OrderController::class);
 Route::resource('review', ReviewController::class);
-Route::resource('commission', CommissionController::class);
+Route::resource('service', ServiceController::class);

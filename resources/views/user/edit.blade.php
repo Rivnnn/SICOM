@@ -17,7 +17,7 @@
                         <input type="text" name="name" id="name" class="border py-2 px-1"
                             placeholder="Masukkan Nama user" value="{{ $user->name }}">
                         @error('name')
-                            <x-invalid :message="$message" />
+                            <span class="invalid">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                         <input type="email" name="email" id="email" class="border py-2 px-1"
                             placeholder="Masukkan Email" value="{{ $user->email }}">
                         @error('email')
-                            <x-invalid :message="$message" />
+                            <span class="invalid">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                             @endforeach
                         </select>
                         @error('role_id')
-                            <x-invalid :message="$message" />
+                            <span class="invalid">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
