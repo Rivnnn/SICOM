@@ -33,15 +33,7 @@
                         @endif
                     @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ __('Data Master') }}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('user.index') }}">{{ __('Data User') }}</a>
-                                <a class="dropdown-item" href="{{ route('service.index') }}">{{ __('Data Service') }}</a>
-                            </div>
+                            <a class="nav-link" href="{{ route('user.index') }}">{{ __('Data') }}</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -50,7 +42,6 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('user.index') }}">{{ __('Profile') }}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -75,6 +66,25 @@
     </main>
     </div>
     @vite('resources/js/app.js')
+    <footer class="bg-dark text-white py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                <ul class="nav">
+                    <li class="nav-item"><a href="#" class="nav-link text-white">Tentang Kami</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-white">Kontak</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-white">Kebijakan Privasi</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-white">Syarat & Ketentuan</a></li>
+                </ul>
+            </div>
+            <div>
+                <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+            </div>
+            <div>© 2024 SICOM. Semua Hak Dilindungi.</div>
+        </div>
+    </footer>
 </body>
 
 </html>
