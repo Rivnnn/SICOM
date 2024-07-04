@@ -48,6 +48,10 @@
                                     <td class="border text-center">{{ $service->category->name }}</td>
                                     <td class="border text-center">
                                         <div class="flex gap-x-5 items-center justify-center">
+                                            <button class="btn btn-danger"
+                                                onclick="location.href='{{ route('order.index')}}'">
+                                                Order
+                                            </button>
                                             <button class="btn btn-primary"
                                                 onclick="location.href='{{ route('service.edit', $service->id) }}'">
                                                 Edit
