@@ -21,6 +21,27 @@ class ServiceController extends Controller
         return view('service.index', compact('services'));
     }
 
+    public function show($id){
+        $service = Service::find($id);
+        $categories = Category::all();
+        $users = User::all();
+    
+        // Populate the form fields with the existing data
+        $data = [
+            "service" => $service,
+            "categories" => $categories,
+            "users" => $users,
+            "title" => $service->title,
+            "description" => $service->description,
+            "price" => $service->price,
+            "category_id" => $service->category_id,
+            "user_id" => $service->user_id,
+            "image" => $service->image,
+        ];
+    
+        return view('service.show', $data);
+    }
+
     public function destroy($id)
     {
         $service = Service::find($id);
@@ -47,7 +68,7 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => ['required', 'string'],
+            // 'user_id' => ['required', 'string'],
             'title' => ['required'],
             'description' => ['required', 'string'],
             'image' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
@@ -63,7 +84,7 @@ class ServiceController extends Controller
         Log::info("Image path: " . public_path('images') . '/' . $imageName);
 
         $service = new Service();
-        $service->user_id = $request->input('user_id');
+        $service->user_id = 2;
         $service->title = $request->input('title');
         $service->description = $request->input('description');
         $service->image = 'images/' . $imageName;

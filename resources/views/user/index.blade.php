@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card flex flex-wrap justify-center bg-white rounded shadow-md p-4">
                     <div class="card-header">{{ __('Data user') }}</div>
                     <div class="card-body">

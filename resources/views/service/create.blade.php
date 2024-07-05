@@ -82,7 +82,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="user_id">{{ __('User') }}</label>
@@ -99,7 +99,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group row mb-0 mt-4 text-center">
                                 <button type="submit" class="btn btn-primary ">
                                     {{ __('Create') }}
