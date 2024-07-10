@@ -101,7 +101,12 @@
                                 </div>
                             </div> --}}
                             <div class="form-group row mb-0 mt-4 text-center">
-                                <button type="submit" class="btn btn-primary ">
+                                <button type="submit" class="btn btn-primary "
+                                    onclick="Swal.fire({title: 'Error!',
+                                                        text: 'Do you want to continue',
+                                                        icon: 'error',
+                                                        confirmButtonText: 'Cool'
+                                                        })">
                                     {{ __('Create') }}
                                 </button>
                             </div>

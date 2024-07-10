@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class ServiceController extends Controller
@@ -44,17 +45,17 @@ class ServiceController extends Controller
 
     public function destroy($id)
     {
-        $service = Service::find($id);
-        $service->delete();
-        if (!$service) {
-            return redirect()->route('service.index')->with('error', 'Service not found!');
-        }
-    
-        if (!$service->delete()) {
-            return redirect()->route('service.index')->with('error', 'delete service!');
-        }
-    
-        return redirect()->route('service.index')->with('success', 'Service deleted successfully!');
+     $service = Service::find($id);
+
+    if (!$service) {
+        return redirect()->route('service.index')->with('error', 'Service not found!');
+    }
+
+    if (!$service->delete()) {
+        return redirect()->route('service.index')->with('error', 'Failed to delete service!');
+    }
+
+    return redirect()->route('service.index')->with('success', 'Service deleted successfully!');
 
     }
 
@@ -84,12 +85,12 @@ class ServiceController extends Controller
         Log::info("Image path: " . public_path('images') . '/' . $imageName);
 
         $service = new Service();
-        $service->user_id = 2;
+        $service->user_id = Auth::id();
         $service->title = $request->input('title');
         $service->description = $request->input('description');
-        $service->image = 'images/' . $imageName;
-        $service->price = $request->input('price');
         $service->category_id = $request->input('category_id');
+        $service->price = $request->input('price');
+        $service->image = 'images/' . $imageName;
         $service->save();
 
         return redirect()->route('service.index')->with('success', 'Service created successfully!');
@@ -133,7 +134,7 @@ public function update(Request $request, $id)
     }
 
     $service->category_id = $request->input('category_id');
-    $service->user_id = $request->input('user_id');
+    $service->user_id = auth()->id();
     $service->save();
 
     return redirect()->route('service.index')->with('success', 'Service berhasil diupdate');

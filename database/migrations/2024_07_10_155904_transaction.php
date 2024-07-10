@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('service_id');
-            $table->foreignId('order_id');
-            $table->integer('rating');
-            $table->text('comment');
+            $table->foreignId('order_id')->constrained()->onDelete('cascade');
+            $table->decimal('amount', 8, 2);
+            $table->enum('payment_method', ['credit card', 'mobile bank']);
+            $table->enum('status', ['paid', 'pending', 'failed']);
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reviews');
+        //
     }
 };

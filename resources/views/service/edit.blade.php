@@ -93,12 +93,11 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row mb-3">
+                            {{-- <div class="form-group row mb-3">
                                 <label for="user_id" class="col-md-4 col-form-label text-md-right">User
                                     <span></span></label>
                                 <div class="col-md-6">
                                     <select name="user_id" id="user_id" class="form-control">
-                                        <option value="">Pilih User</option>
                                         @foreach ($users as $user)
                                             <option value="{{ $user->id }}"
                                                 {{ $service->user_id == $user->id ? 'elected' : '' }}>{{ $user->name }}
@@ -111,7 +110,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-actions">
                                 <button type="submit" class="btn btn-primary">Update</button>
