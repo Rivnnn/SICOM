@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Review;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
-class ReviewController extends Controller
+class OrderController extends Controller
 {
     public function __construct()
     {
@@ -16,9 +16,9 @@ class ReviewController extends Controller
     public function index()
     {
         $data = [
-            "review" => Review::all(),
+            "order" => Order::all(),
         ];
 
-        return view('review.index', $data);
+        return view('order.index', $data);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,14 +21,14 @@ class UserController extends Controller
             "users" => User::with('role')->get(),
         ];
 
-        return view('user.index', $data);
+        return view('admin.user.index', $data);
     }
     
     public function destroy($id)
     {
         $users = user::find($id);
+        return redirect()->route('user.index')->with('success', " berhasil dihapus");
         $users ->delete();
-        return redirect()->route('user.index')->with('success', $users -> name . " berhasil dihapus");
     }
 
 
@@ -40,7 +40,7 @@ class UserController extends Controller
             "user"   => $users,
             "roles"  => $roles
         ];
-        return view('user.edit', $data);
+        return view('admin.user.edit', $data);
     }
     
     public function update(Request $request, $id)
@@ -86,7 +86,7 @@ class UserController extends Controller
         $data = [
             "roles"  => $roles
         ];
-        return view('user.create');
+        return view('admin.user.create');
     }
 
 

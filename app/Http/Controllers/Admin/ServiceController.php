@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use App\Models\Service;
@@ -18,7 +18,7 @@ class ServiceController extends Controller
     public function index()
     {
         $services = Service::all();
-        return view('service.index', compact('services'));
+        return view('admin.service.index', compact('services'));
     }
 
     public function show($id){
@@ -62,7 +62,7 @@ class ServiceController extends Controller
     {
         $categories = Category::all();
         $users = User::all();
-        return view('service.create', compact('categories', 'users'));
+        return view('admin.service.create', compact('categories', 'users'));
     }
 
     public function store(Request $request)
