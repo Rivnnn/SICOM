@@ -48,10 +48,10 @@ class UserController extends Controller
         $request->validate([
             'name' => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users,email,'. $id],
-            // 'old_password' => ['required'],
             'password' => ['nullable', 'confirmed'],
             'password_confirmation' => ['nullable'],
             'role_id' => ['required', 'numeric'],
+            // 'old_password' => ['required'],
         ]);
 
         // $user = User::find($id);
@@ -71,6 +71,8 @@ class UserController extends Controller
     // Update data pengguna
     $user->name = $request->input('name');
     $user->email = $request->input('email');
+    // $user->bio = $request->input('bio');
+    // $user->foto_profile = $request->input('foto_profile');
     if ($request->input('password')) {
         $user->password = Hash::make($request->input('password'));
     }
@@ -102,6 +104,8 @@ class UserController extends Controller
 
         $users = User::create([
             'name' => $request->input('name'),
+            'bio' => $request->input('bio'),
+            'foto_profile' => $request->input('foto_profile'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'role_id' => $request->input('role_id'),

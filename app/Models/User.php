@@ -11,6 +11,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -49,6 +51,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function hasRole($role)
+    {
+        return $this->role()->where('role', $role)->exists();
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);
@@ -59,13 +66,33 @@ class User extends Authenticatable
         return $this->hasMany(Service::class);
     }
 
-    public function orders()
+    public function ordersAsClient()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class, 'client_id');
     }
 
-    public function reviews()
+    public function ordersAsFreelancer()
     {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(Order::class, 'freelancer_id');
+    }
+
+    public function reviewsAsClient()
+    {
+        return $this->hasMany(Review::class, 'client_id');
+    }
+
+    public function reviewsAsFreelancer()
+    {
+        return $this->hasMany(Review::class, 'freelancer_id');
+    }
+
+    public function messagesSent()
+    {
+        return $this->hasMany(Message::class, 'from_user_id');
+    }
+
+    public function messagesReceived()
+    {
+        return $this->hasMany(Message::class, 'to_user_id');
     }
 }

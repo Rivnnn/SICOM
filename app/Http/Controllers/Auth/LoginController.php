@@ -36,5 +36,9 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
+        // $this->middleware('seller');
+        // $this->middleware('freelance')->except('logout');
     }
+
+    
 }
