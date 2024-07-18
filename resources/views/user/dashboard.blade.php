@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.user')
 
-@section('content')
+@section('content') 
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold mb-4">User Dashboard</h1>
         <div class="bg-white p-6 rounded shadow">

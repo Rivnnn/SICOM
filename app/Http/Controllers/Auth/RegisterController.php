@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -52,7 +53,6 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            // 'description' => ['required', 'string', 'max:255'],
             // 'role_id' => ['required', 'int', 'min:1'],
         ]);
     }
@@ -70,7 +70,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'bio' => "",
             'password' => Hash::make($data['password']),
-           'role_id' => 3,
+           'role_id' =>  Role::where('role', 'user')->first()->id,
         ]);
         return redirect()->route('user.index')->with('success', 'Data user berhasil');
     }

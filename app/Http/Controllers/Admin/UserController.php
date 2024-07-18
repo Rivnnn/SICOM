@@ -23,7 +23,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('user.index')->with('success', 'User deleted successfully');
+        return redirect()->route('admin.user.index')->with('success', 'User deleted successfully');
     }
 
 
@@ -72,7 +72,7 @@ class UserController extends Controller
     $user->role_id = $request->input('role_id');
     $user->save();
 
-        return redirect()->route('user.index')->with('success', 'User berhasil diupdate');
+        return redirect()->route('admin.user.index')->with('success', 'User berhasil diupdate');
     }
 
     public function create()
@@ -102,7 +102,7 @@ class UserController extends Controller
             'role_id' => $request->input('role_id'),
         ]);
 
-        return redirect()->route('user.index')->with('success', 'User baru berhasil ditambahkan');
+        return redirect()->route('admin.user.index')->with('success', 'User baru berhasil ditambahkan');
     }
     
 }

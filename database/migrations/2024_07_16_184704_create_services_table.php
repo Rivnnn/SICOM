@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('title');
-            $table->string('image');
+            // $table->string('image');
             $table->text('description');
             $table->unsignedBigInteger('category_id');
             $table->decimal('price', 8, 2);

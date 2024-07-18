@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\Admin\OrdersController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -20,7 +21,6 @@ class Service extends Model
         'user_id',
         'title',
         'description',
-        'image',
         'price',
         'category_id',
     ];
@@ -32,7 +32,7 @@ class Service extends Model
 
     public function orders()
     {
-        return $this->hasMany(Orders::class);
+        return $this->hasMany(Order::class);
     }
 
     public function reviews()

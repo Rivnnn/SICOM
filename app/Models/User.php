@@ -66,24 +66,24 @@ class User extends Authenticatable
         return $this->hasMany(Service::class);
     }
 
-    public function ordersAsClient()
+    public function ordersAsUser()
     {
-        return $this->hasMany(Orders::class, 'client_id');
+        return $this->hasMany(Order::class, 'user_id');
     }
 
-    public function ordersAsFreelancer()
+    public function ordersAsSeller()
     {
-        return $this->hasMany(Orders::class, 'freelancer_id');
+        return $this->hasMany(Order::class, 'seller_id');
     }
 
-    public function reviewsAsClient()
+    public function reviewsAsUser()
     {
-        return $this->hasMany(Review::class, 'client_id');
+        return $this->hasMany(Review::class, 'user_id');
     }
 
-    public function reviewsAsFreelancer()
+    public function reviewsAsSeller()
     {
-        return $this->hasMany(Review::class, 'freelancer_id');
+        return $this->hasMany(Review::class, 'seller_id');
     }
 
     public function messagesSent()

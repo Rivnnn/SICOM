@@ -1,86 +1,39 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
 @section('content')
-    <div class="container">
-        <div class="form-container">
-            <div class="form-header">
-                <h1>Form Tambah User</h1>
-                <a href="{{ route('user.index') }}">Back</a>
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Create User</h1>
+        <form action="{{ route('admin.user.store') }}" method="POST">
+            @csrf
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" name="name" id="name"
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
             </div>
-            <form method="POST" action="{{ route('user.store') }}" class="form">
-                @csrf
-                <div class="form-group">
-                    <label for="name">
-                        <span><sup>*</sup></span> Nama User
-                    </label>
-                    <div class="input-container">
-                        <input type="text" name="name" id="name" placeholder="Masukan Nama"
-                            value="{{ old('name') }}">
-                        @error('role_id')
-                            <span class="invalid">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">
-                        <span><sup>*</sup></span> Email
-                    </label>
-                    <div class="input-container">
-                        <input type="text" name="email" id="email" placeholder="Masukan Email"
-                            value="{{ old('email') }}">
-                        @error('role_id')
-                            <span class="invalid">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">
-                        <span><sup>*</sup></span> Password
-                    </label>
-                    <div class="input-container">
-                        <input type="password" name="password" id="password" placeholder="Masukan Password"
-                            value="{{ old('password') }}">
-                        @error('role_id')
-                            <span class="invalid">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="password_confirmation">
-                        <span><sup>*</sup></span> Confirm Password
-                    </label>
-                    <div class="input-container">
-                        <input type="password" name="password_confirmation" id="password_confirmation"
-                            placeholder="Masukan Password" value="{{ old('password_confirmation') }}">
-                        @error('role_id')
-                            <span class="invalid">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="role_id">
-                        <span><sup>*</sup></span> Role
-                    </label>
-                    <div class="input-container">
-                        <select name="role_id" id="role_id">
-                            <option value="">Tentukan Role</option>
-                            <option value="1">Admin</option>
-                            <option value="2">Seller</option>
-                            <option value="3">User</option>
-                        </select>
-                        @error('role_id')
-                            <span class="invalid">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-actions">
-                    <button type="submit">Save</button>
-                </div>
-            </form>
-        </div>
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" name="email" id="email"
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" name="password" id="password"
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+            </div>
+            <div class="mb-4">
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                <input type="password" name="password_confirmation" id="password_confirmation"
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+            </div>
+            <div class="mb-4">
+                <label for="role_id" class="block text-sm font-medium text-gray-700">Role</label>
+                <select name="role_id" id="role_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                    @foreach ($roles as $role)
+                        <option value="{{ $role->id }}">{{ $role->role }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Create User</button>
+        </form>
     </div>
 @endsection

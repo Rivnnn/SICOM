@@ -45,17 +45,17 @@
                                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                         aria-labelledby="dropdownDividerButton">
                                         @if (Auth::user()->role_id === '1')
-                                            <li>
-                                                <a href="{{ route('user.index') }}"
+                                            {{-- <li>
+                                                <a href="{{ route('admin.user.index') }}"
                                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Admin
                                                     Dashboard</a>
-                                            </li>
+                                            </li> --}}
                                         @elseif(Auth::user()->role_id === 2)
-                                            <li>
-                                                <a href="{{ route('user.index') }}"
+                                            {{-- <li>
+                                                <a href="{{ route('seller.user.index') }}"
                                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Seller
                                                     Dashboard</a>
-                                            </li>
+                                            </li> --}}
                                         @endif
                                         <li>
                                             <a href="{{ route('logout') }}"
