@@ -1,24 +1,28 @@
 <?php
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Admin\UserController as AdminUserController;
-use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
-use App\Http\Controllers\Admin\OrderController as AdminOrderController;
-use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
-use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
-use App\Http\Controllers\Admin\profileController as AdminprofileController;
-
-use App\Http\Controllers\Seller\DashboardController as SellerDashboardController;
-use App\Http\Controllers\Seller\ServiceController as SellerServiceController;
-use App\Http\Controllers\Seller\OrderController as SellerOrderController;
-use App\Http\Controllers\Seller\MessageController as SellerMessageController;
-
-use App\Http\Controllers\User\DashboardController as UserDashboardController;
-use App\Http\Controllers\User\OrderController as UserOrderController;
-use App\Http\Controllers\User\ServiceController as UserServiceController;
-use App\Http\Controllers\User\ReviewController as UserReviewController;
-use App\Http\Controllers\User\MessageController as UserMessageController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Admin\UserController as AUserController;
+use App\Http\Controllers\Admin\ServiceController as AServiceController;
+use App\Http\Controllers\Admin\OrderController as AOrderController ;
+use App\Http\Controllers\Admin\CategoryController as ACategoryController;
+use App\Http\Controllers\Admin\ReviewController as AReviewController;
+use App\Http\Controllers\Admin\DashboardController as ADashboardController;
+
+use App\Http\Controllers\Seller\UserController as SUserController;
+use App\Http\Controllers\Seller\ServiceController as SServiceController;
+use App\Http\Controllers\Seller\OrderController as SOrderController ;
+use App\Http\Controllers\Seller\CategoryController as SCategoryController;
+use App\Http\Controllers\Seller\ReviewController as SReviewController;
+use App\Http\Controllers\Seller\MesaagesController as SMesaagesController;
+use App\Http\Controllers\Seller\DashboardController as SDashboardController;
+
+use App\Http\Controllers\User\DashboardController as UDashboardController;
+use App\Http\Controllers\User\OrderController as UOrderController;
+use App\Http\Controllers\User\ReviewController as UReviewController;
+use App\Http\Controllers\User\PaymentController as UPaymentController;
+
+use Illuminate\Support\Facades\Auth;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,32 +31,48 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->group(function () {
-    Route::get('dashboard', [AdminDashboardController::class]);
-    Route::resource('user', AdminUserController::class);
-    Route::resource('order', AdminOrderController::class);
-    Route::resource('review', AdminReviewController::class);
-    Route::resource('service', AdminServiceController::class);
-    Route::resource('category', AdminCategoryController::class);
+
+
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('dashboard', [ADashboardController::class, 'dashboard'])->name('dashboard');
+    Route::resource('users', AUserController::class);
+    Route::resource('services', AServiceController::class);
+    Route::resource('orders', AOrderController::class);
+    Route::resource('category', ACategoryController::class);
+    Route::resource('reviews', AReviewController::class);
 });
-Route::namespace('App\Http\Controllers\Seller')->prefix('seller')->group(function () {
-    Route::get('dashboard', [SellerDashboardController::class])->name('dashboard');
-    Route::resource('services', SellerServiceController::class);
-    Route::resource('orders', SellerOrderController::class);
-    Route::resource('messages', SellerMessageController::class);
-    // Route::get('/seller/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/seller/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/seller/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+Route::put('seller/orders/{order}/update-status', [SOrderController::class, 'updateStatus'])
+->name('seller.orders.updateStatus')
+->middleware('auth');
+
+Route::middleware('auth')->prefix('seller')->name('seller.')->group(function () {
+    Route::get('dashboard', [SDashboardController::class, 'dashboard'])->name('dashboard');
+    Route::resource('services', SServiceController::class);
+    Route::resource('orders', SOrderController::class);
+
+    // Route::get('profile', [SellerProfileController::class, 'edit'])->name('profile.edit');
+    // Route::put('profile', [SellerProfileController::class, 'update'])->name('profile.update');
+    // Route::resource('messages', SMessageController::class);
 });
-Route::namespace('App\Http\Controllers\User')->prefix('user')->group(function () {
-    Route::get('dashboard', [UserDashboardController::class])->name('dashboard');
-    Route::resource('services', UserServiceController::class)->only(['index', 'show']);
-    Route::resource('orders', UserOrderController::class)->only(['index', 'show']);
-    Route::resource('reviews', UserReviewController::class);
-    Route::resource('messages', UserMessageController::class);
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+// User Routes
+Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
+    Route::get('dashboard', [UDashboardController::class, 'index'])->name('dashboard');
+    // Route::resource('services', UserServiceController::class);
+    Route::resource('orders', UOrderController::class);
+    // Route::get('profile', [UserProfileController::class, 'edit'])->name('profile.edit');
+    // Route::put('profile', [UserProfileController::class, 'update'])->name('profile.update');
+    Route::get('user/orders/{order}/review', [UReviewController::class, 'create'])->name('review.create');
+    Route::post('user/orders/{order}/review', [UReviewController::class, 'store'])->name('review.store');
+    Route::get('payment/{order}', [UPaymentController::class, 'show'])->name('payment.show');
+    Route::post('handle-payment/{order}', [UPaymentController::class, 'handlePayment'])->name('payment.handle');
+    Route::get('payment-success/{order}', [UPaymentController::class, 'paymentSuccess'])->name('payment.success');
+    Route::get('payment-cancel/{order}', [UPaymentController::class, 'paymentCancel'])->name('payment.cancel');
+    // Route::resource('messages', UserMessageController::class);
 });
+
+
