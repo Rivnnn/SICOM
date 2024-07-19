@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-4">category</h1>
+        <h1 class="text-2xl font-bold mb-4">Category</h1>
         <a href="{{ route('admin.category.create') }}" class="bg-green-500 text-white px-4 py-2 rounded">Create Category</a>
         <table
             class="shadow-md rounded overflow-hidden border-collapse min-w-full text-sm text-left rtl:text-right bg-white mt-4">
